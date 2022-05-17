@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Contribution</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="register">Register</string>
+    <string name="not_register">Already Registered?</string>
+    <string name="name">SignUp</string>
 </resources>
