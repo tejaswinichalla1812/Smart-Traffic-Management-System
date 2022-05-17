@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Contribution</string>
+    <string name="user_home_screen">User Home Screen</string>
+    <string name="welcome">Welcome to the Contribution</string>
 </resources>
