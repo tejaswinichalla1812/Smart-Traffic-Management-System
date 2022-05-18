@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Contribution">
         <activity
-            android:name=".HomeScreen"
+            android:name=".Logup"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
