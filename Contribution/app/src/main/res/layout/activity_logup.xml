@@ -8,7 +8,9 @@
     android:background="@drawable/bthre"
     android:padding="16dp"
     android:gravity="center"
-    tools:context=".Logup">
+              
+    tools:context="com.example.Contribute.Logup">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,3 +111,4 @@
 
     </LinearLayout>
 </LinearLayout>
+

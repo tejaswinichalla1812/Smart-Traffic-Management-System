@@ -1,5 +1,4 @@
 package com.example.contribution;
-
 import android.content.Intent;
 import android.text.TextUtils;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ public class Logup extends AppCompatActivity {
     Button mLoginBtn;
     TextView mRegisterBtn;
     FirebaseAuth fAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,5 +92,4 @@ public class Logup extends AppCompatActivity {
             }
         });
     }
-
 }
