@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "478792950801",
+    "project_id": "contribute-bcaf8",
+    "storage_bucket": "contribute-bcaf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478792950801:android:9fde299acb0f66b86fbdb0",
+        "android_client_info": {
+          "package_name": "com.android.contribute"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478792950801-nv8cfn54fbv032fos0j48dt6lj96vitj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8yMcMia8Fw5wa4ebvdiFEWOFJ-xjUJo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478792950801-nv8cfn54fbv032fos0j48dt6lj96vitj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
