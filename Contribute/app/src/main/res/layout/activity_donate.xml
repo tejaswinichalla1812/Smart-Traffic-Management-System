@@ -264,8 +264,6 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="UnusedAttribute" />
-
-
-
+        
     </LinearLayout>
 </ScrollView>
