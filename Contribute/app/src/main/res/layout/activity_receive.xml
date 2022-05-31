@@ -107,3 +107,126 @@
                             tools:ignore="UnusedAttribute" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/phoneError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        app:hintTextColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        app:boxStrokeColor="@color/white">
+
+                        <EditText
+                            android:id="@+id/phone_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/phone_number"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/opensans"
+                            android:inputType="phone"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:backgroundTint="@android:color/transparent"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/addressError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        app:hintTextColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        app:boxStrokeColor="@color/white">
+
+                        <EditText
+                            android:id="@+id/addresss"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/address"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/opensans"
+                            android:inputType="textMultiLine"
+                            android:maxLines="2"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:backgroundTint="@android:color/transparent"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/pincodeerror"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        app:hintTextColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        app:boxStrokeColor="@color/white">
+                        <EditText
+                            android:id="@+id/pincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/pincode"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/opensans"
+                            android:inputType="phone"
+                            android:maxLines="10"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:backgroundTint="@android:color/transparent"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:id="@+id/navigate_donor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/navigate"
+                        android:backgroundTint="@color/button_background_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:inputType="phone"
+                        android:maxLines="10"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/button_background_color"
+            android:text="@string/submit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/button_text_color"
+            android:textSize="20sp"
+            tools:ignore="UnusedAttribute" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
