@@ -71,3 +71,121 @@ public class GoodWillHomeScreen extends AppCompatActivity {
 
             }
         });
+        search_tv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // nothing implemented
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                searching(s,db);
+                if(s.toString().isEmpty()){
+                    getData(db);
+
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //nothing implemented
+            }
+        });
+        getData(db);
+    }
+
+    private void SubscribeToFirebaseTopic() {
+
+        FirebaseMessaging.getInstance().subscribeToTopic("FOOD")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.d("GOODWILLHOMESCREEN","subscribed");
+                        } else{
+                            Log.d("GOODWILLHOMESCREEN","UnSubscribed");
+                        }
+                    }
+                });
+
+    }
+
+    private void getData(FirebaseFirestore db) {
+        progressBar.setCancelable(true);//you can cancel it by pressing back button
+        progressBar.setMessage("Please wait ...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);//initially progress is 0
+        progressBar.setMax(100);//sets the maximum value 100
+        progressBar.show()    ;
+        db.collection("user data").orderBy("timestamp", Query.Direction.DESCENDING).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<DocumentSnapshot> list=queryDocumentSnapshots.getDocuments();
+                        if(list.size()>0){
+                            datalist.clear();
+                        }
+                        for(DocumentSnapshot d:list)
+                        {
+                            model obj=d.toObject(model.class);
+                            datalist.add(obj);
+/*
+                            String Userid = (String) d.get("userid");
+                            if(Userid.equals(userID)) {
+                                datalist.add(obj);
+                            }
+*/
+                        }
+                        adapter.notifyDataSetChanged();
+                        progressBar.dismiss();
+                    }
+                });
+    }
+
+    private void searching(CharSequence s, FirebaseFirestore db) {
+        progressBar.setCancelable(true);//you can cancel it by pressing back button
+        progressBar.setMessage("Please wait ...");
+        progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressBar.setProgress(0);//initially progress is 0
+        progressBar.setMax(100);//sets the maximum value 100
+        progressBar.show()    ;
+
+        db.collection("user data").whereEqualTo("pincode",s.toString()).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<DocumentSnapshot> list=task.getResult().getDocuments();
+                        if(list.size()>0){
+                            datalist.clear();
+                        }
+                        for(DocumentSnapshot d:list)
+                        {
+                            model obj=d.toObject(model.class);
+                            datalist.add(obj);
+                            /*String Userid = (String) d.get("userid");
+                            if(Userid.equals(userID)) {
+                                datalist.add(obj);
+                            }*/
+                        }
+                        adapter.notifyDataSetChanged();
+                        progressBar.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        FirebaseAuth.getInstance().signOut();
+    }
+}
+
