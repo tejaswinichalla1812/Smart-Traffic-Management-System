@@ -40,4 +40,70 @@
                 app:cardBackgroundColor="@android:color/transparent"
                 Card_View:cardCornerRadius="5dp"
                 Card_View:cardElevation="0dp">
-                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/nameError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+
+                        android:textColorHint="@color/white"
+                        app:hintTextColor="@color/white"
+                        app:boxStrokeColor="@color/white">
+
+                        <EditText
+                            android:id="@+id/receivername"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/receiver_name"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/opensans"
+                            android:inputType="text"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:backgroundTint="@android:color/transparent"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/descriptionError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        app:hintTextColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        app:boxStrokeColor="@color/white">
+
+                        <EditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/description"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/opensans"
+                            android:inputType="textMultiLine"
+                            android:maxLines="10"
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white"
+                            android:backgroundTint="@android:color/transparent"
+                            android:importantForAutofill="no"
+                            tools:ignore="UnusedAttribute" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
