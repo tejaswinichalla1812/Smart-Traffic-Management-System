@@ -252,7 +252,18 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/button_background_color"
+            android:text="@string/submit"
+            android:textColor="@color/button_text_color"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="UnusedAttribute" />
+        
     </LinearLayout>
 </ScrollView>
