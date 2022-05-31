@@ -80,3 +80,57 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
         fAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
         /*
+        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mapFragment.getMapAsync(this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+
+*/
+        navigate_donor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkGPS();
+
+            }
+        });
+        mSubmitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fullname = mFullName.getText().toString().trim();
+                String code = pincode.getText().toString();
+                String number = phone_tv.getText().toString();
+                String addressss = addresss.getText().toString();
+                String description= mDescription.getText().toString().trim();
+                String type= "Receiver";
+
+                if(TextUtils.isEmpty(fullname))
+                {
+                    mFullName.setError("Name is Required.");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(addressss))
+                {
+                    addresss.setError("Address is Required.");
+                    return;
+                }
+
+                if(number.length() < 10)
+                {
+                    phone_tv.setError("Phone Number Must be >=10 Characters");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(code))
+                {
+                    pincode.setError("pincode is Required.");
+                    return;
+                }
+                if(TextUtils.isEmpty(description))
+                {
+                    mFullName.setError("Description is Required.");
+                    return;
+                }
+         */
