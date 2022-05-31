@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import com.example.Contribute.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -36,12 +35,69 @@ public class MainActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+
+        donate.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Donate.class);
+                startActivity(intent);
+            }
+        });
+        receive.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Receive.class);
+                startActivity(intent);
+            }
+        });
+        foodmap.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FoodMap.class);
+                startActivity(intent);
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), About.class);
+                startActivity(intent);
+            }
+        });
+        mypin.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MyPin.class);
+                startActivity(intent);
+            }
+        });
+        history.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), UserdataActivity.class);
+                startActivity(intent);
+            }
+        });
+        contact.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Contact.class);
+                startActivity(intent);
+            }
+        });
         logout.setOnClickListener(new View.OnClickListener ()
         {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(MainActivity.this, landingpage.class);
+                Intent intent = new Intent(MainActivity.this, SplashScreen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
