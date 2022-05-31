@@ -37,3 +37,20 @@ public class landingpage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Logup.class));
             }
         });
+        register.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Signup.class));
+            }
+        });
+        about.setOnClickListener(new View.OnClickListener ()
+        {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), About.class));
+            }
+        });
+    }
+
+}
