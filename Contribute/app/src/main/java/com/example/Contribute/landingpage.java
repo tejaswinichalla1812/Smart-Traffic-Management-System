@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.Contribute.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class landingpage extends AppCompatActivity {
@@ -38,20 +37,3 @@ public class landingpage extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Logup.class));
             }
         });
-        register.setOnClickListener(new View.OnClickListener ()
-        {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Signup.class));
-            }
-        });
-        about.setOnClickListener(new View.OnClickListener ()
-        {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), About.class));
-            }
-        });
-    }
-
-}
