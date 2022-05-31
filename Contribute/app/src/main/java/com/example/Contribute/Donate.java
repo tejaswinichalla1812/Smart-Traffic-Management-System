@@ -219,4 +219,56 @@ public class Donate extends AppCompatActivity {
         }
     }
 
+    private void checkGPS() {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2222);
+        }
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(this, "Enable GPS ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), FoodMap.class);
+            startActivityForResult(intent, 1111);
+        } else {
+            showGPSdisabledAlert();
+        }
+    }
+
+    private void showGPSdisabledAlert() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setMessage("GPS is disabled in your device. Would you like to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("GPS ENABLE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog ale = alert.create();
+        alert.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1111) {
+            if (resultCode == RESULT_OK) {
+                String addressLocation = data.getStringExtra("ADDRESS");
+                Double  latt= data.getDoubleExtra("LATITUDE",0.0d);
+                Double longi= data.getDoubleExtra("LONGITUDE",0.0d);
+                latitude=latt.toString();
+                longitude=longi.toString();
+                address.setText(addressLocation);
+            }
+        }
+    }
+}
 
