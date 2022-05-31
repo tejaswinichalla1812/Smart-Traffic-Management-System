@@ -183,3 +183,177 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
             }
         });
     }
+    private void sendNotification(String fullname, String fooditem) {
+        String topic = "/topics/FOOD";
+        String title = "RECEIVE";
+
+        try {
+            JSONObject notification = new JSONObject();
+            JSONObject notificationBody = new JSONObject();
+            try {
+                notificationBody.put("title", title);
+                notificationBody.put("message", fullname + fooditem);
+                notification.put("to", topic);
+                notification.put("data", notificationBody);
+            } catch (Exception e) {
+                e.getMessage();
+            }
+            sendPayload(notification);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private void sendPayload(JSONObject notification) {
+        try {
+
+
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            String url = "https://fcm.googleapis.com/fcm/send";
+            JsonObjectRequest request = new JsonObjectRequest(url, notification, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Toast.makeText(Receive.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(Receive.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    String api_key_header_value = "Key=AAAA5fPOgyY:APA91bFNMsEmGFiVPIhelK92PPeJR0b4wiqTr7uvaHHkGFP6bAWvtrjX7kL9H7ws2pIJPzm_2SwLAGk1vNXgE-DDDbcZ81GdxxeMVuJkZ1dF0q_RMq20Et8BRsUVT7fuN6fmzROB6qd7";
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("Content-Type", "application/json");
+                    headers.put("Authorization", api_key_header_value);
+                    return headers;
+                }
+            };
+            queue.add(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void checkGPS() {
+        if(ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},2222);
+        }
+        LocationManager locationManager= (LocationManager) getSystemService(LOCATION_SERVICE);
+        if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            Toast.makeText(this, "Enable GPS ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), FoodMap.class);
+            startActivityForResult(intent,1111);
+        }else{
+            showGPSdisabledAlert();
+        }
+    }
+
+    private void showGPSdisabledAlert() {
+        AlertDialog.Builder alert=new AlertDialog.Builder(this);
+        alert.setMessage("GPS is disabled in your device. Would you like to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("GPS ENABLE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);
+                    }
+                });
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog ale= alert.create();
+        alert.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==1111){
+            if(resultCode==RESULT_OK){
+                String addressLocation=data.getStringExtra("ADDRESS");
+                Double  latt= data.getDoubleExtra("LATITUDE",0.0d);
+                Double longi= data.getDoubleExtra("LONGITUDE",0.0d);
+                latitude=latt.toString();
+                longitude=longi.toString();
+
+                addresss.setText(addressLocation);
+            }
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        buildGoogleApiClient();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
+    }
+
+    protected synchronized void buildGoogleApiClient(){
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        mLastLocation = location;
+        LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+
+        //MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here");
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        //mMap.addMarker(markerOptions1).showInfoWindow();
+
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are here");
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+        mMap.addMarker(markerOptions).showInfoWindow();
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        mLocationRequest = new LocationRequest();
+        //mLocationRequest.setInterval(1000);
+        //mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == REQUEST_CODE){
+            if(grantResults.length > 0 && grantResults[0]  == PackageManager.PERMISSION_GRANTED){
+                //     mapFragment.getMapAsync(this);
+            }else{
+                Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+}
