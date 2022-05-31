@@ -134,3 +134,52 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
                     return;
                 }
          */
+                userID = fAuth.getCurrentUser().getUid();
+                //DocumentReference documentReference = fStore.collection("receiver").document(userID);
+                CollectionReference collectionReference = fStore.collection("user data");
+
+                //   GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+                Map<String,Object> user = new HashMap<>();
+                user.put("timestamp", FieldValue.serverTimestamp());
+                user.put("name",fullname);
+                user.put("description",description);
+                user.put("pincode",code);
+                user.put("address",addressss);
+                user.put("thingstoDonate", "");
+
+                user.put("phone",number);
+                // user.put("location",geoPoint);
+                user.put("userid",userID);
+                user.put("latitude", latitude);
+                user.put("longitude", longitude);
+                user.put("isOpen", "true");
+                user.put("foodDurationTime", "1");
+
+                user.put("type",type);
+
+                collectionReference.add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                sendNotification(fullname," : we need your help");
+
+                                Toast.makeText(getApplicationContext(),"Success!",Toast.LENGTH_SHORT).show();
+                                Log.d(TAG,"Success!");
+
+                                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                Intent intent = new Intent(Receive.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(),"Error!",Toast.LENGTH_SHORT).show();
+                                Log.w(TAG, "Error!", e);
+                            }
+                        });
+
+            }
+        });
+    }
