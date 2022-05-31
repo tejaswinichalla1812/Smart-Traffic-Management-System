@@ -224,6 +224,35 @@
                         android:importantForAutofill="no"
                         tools:ignore="UnusedAttribute" />
 
-                
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    app:boxStrokeColor="@color/white">
+
+                    <Button
+                        android:id="@+id/navigate_donor"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/navigate"
+                        android:backgroundTint="@color/button_background_color"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:maxLines="10"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>
