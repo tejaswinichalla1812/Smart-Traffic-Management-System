@@ -6,10 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,13 +30,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-public class MyPin extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,  com.google.android.gms.location.LocationListener {
+import java.util.Locale;
+
+public class FoodMap extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
@@ -40,23 +46,89 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
     SupportMapFragment mapFragment;
     private int REQUEST_CODE = 11;
     FirebaseFirestore fStore;
-    FirebaseAuth fAuth;
     public static final String TAG = "TAG";
+    String addressss = "";
+    double latitude;
+    double longitude;
     private FirebaseFirestore cloudstorage;
+    Button submitLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_pin);
-        fAuth= FirebaseAuth.getInstance();
+        setContentView(R.layout.activity_food_map);
+        submitLocation = findViewById(R.id.submitLocation);
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mapFragment.getMapAsync(this);
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    mMap = googleMap;
+                    if (ActivityCompat.checkSelfPermission(FoodMap.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(FoodMap.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
+                    mMap.setMyLocationEnabled(true);
+                    mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                        @Override
+                        public void onMapClick(LatLng latLng) {
+                            try {
+                                mMap.clear();
+
+                                Geocoder geoPoint = new Geocoder(getApplicationContext(), Locale.getDefault());
+                                Address address=geoPoint.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
+                                mMap.clear();
+                                if(address!=null){
+
+                                    addressss=address.getAddressLine(0);
+                                    latitude=latLng.latitude;
+                                    longitude=latLng.longitude;
+                                    mMap.addMarker(new MarkerOptions().position(latLng).title(""+address));
+
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+
+                }
+            });
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
         }
 
+
+        submitLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent();
+                intent.putExtra("ADDRESS",addressss);
+                intent.putExtra("LATITUDE",latitude);
+                intent.putExtra("LONGITUDE",longitude);
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+      /*  if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mapFragment.getMapAsync(this);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        }
+*/
     }
 
     @Override
@@ -65,8 +137,30 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        buildGoogleApiClient();
+       buildGoogleApiClient();
         mMap.setMyLocationEnabled(true);
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                try {
+                    mMap.clear();
+
+                    Geocoder geoPoint = new Geocoder(getApplicationContext(), Locale.getDefault());
+                     Address address=geoPoint.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
+                     mMap.clear();
+                     if(address!=null){
+
+                         addressss=address.getAddressLine(0);
+                         latitude=latLng.latitude;
+                         longitude=latLng.longitude;
+                         mMap.addMarker(new MarkerOptions().position(latLng).title(""+address));
+
+                     }
+                }catch (Exception e){
+                  e.printStackTrace();
+                }
+            }
+        });
     }
 
     protected synchronized void buildGoogleApiClient(){
@@ -81,13 +175,23 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
     @Override
     public void onLocationChanged(@NonNull Location location) {
         mLastLocation = location;
-        showLocation();
+       // showLocation();
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+        Geocoder geoPoint = new Geocoder(getApplicationContext(), Locale.getDefault());
+        try {
 
+            Address address=geoPoint.getFromLocation(latLng.latitude,latLng.longitude,1).get(0);
+            addressss=address.getAddressLine(0);
+            latitude=latLng.latitude;
+            longitude=latLng.longitude;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         MarkerOptions markerOptions1 = new MarkerOptions().position(latLng).title("You are here").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        //mMap.addMarker(markerOptions1).showInfoWindow();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.addMarker(markerOptions1).showInfoWindow();
+
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
         mMap.addMarker(markerOptions1).showInfoWindow();
     }
@@ -102,21 +206,19 @@ public class MyPin extends AppCompatActivity implements OnMapReadyCallback, Goog
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());//
-                                if (document.contains("location") && document.contains("name") && document.contains("description") && document.contains("userid")) {
+                                if (document.contains("location") && document.contains("name") && document.contains("description")) {
                                     GeoPoint location = (GeoPoint) document.get("location");
                                     String title = (String) document.get("name");
                                     String type = (String) document.get("type");
                                     String description = (String) document.get("description");
-                                    String Userid = (String) document.get("userid");
-                                    String userID = fAuth.getCurrentUser().getUid();
 
-                                    if(type.equals("Donor") & Userid.equals(userID)) {
-                                        Log.d(TAG, userID + " Success " + title);
+                                    if(type.equals("Donor")) {
+                                        Log.d(TAG, String.valueOf(location) + " Success " + title);
                                         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                                         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                         mMap.addMarker(new MarkerOptions().position(latLng).title(title+"("+type+")").snippet(description).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
                                     }
-                                    else if(type.equals("Receiver") & Userid.equals(userID)){
+                                    else if(type.equals("Receiver")){
                                         Log.d(TAG, String.valueOf(location) + " Success " + title);
                                         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                                         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

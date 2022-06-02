@@ -5,16 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#757575"
-    tools:context="com.example.Contribute.UserHomeScreen">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/UserHome"
-        android:fontFamily="@font/opensans"
-        android:textSize="26sp"
-        android:textColor="@color/black"
-        android:layout_margin="40dp" />
+    tools:context=".UserHomeScreen">
 
     <Button
         android:layout_width="250dp"
@@ -22,6 +13,8 @@
         android:textSize="20dp"
         android:id="@+id/registerPage_iv"
         android:padding="30dp"
+        android:textColor="@color/white"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +25,9 @@
         android:layout_width="250dp"
         android:text="LOGIN"
         android:textSize="20dp"
-        android:id="@+id/loginPage_iv"
+      android:textColor="@color/white"
+
+      android:id="@+id/loginPage_iv"
         android:padding="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -47,6 +42,8 @@ app:layout_constraintTop_toTopOf="parent"
         android:textSize="20dp"
         android:id="@+id/aboutusPage_iv"
         android:padding="30dp"
+        android:textColor="@color/white"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

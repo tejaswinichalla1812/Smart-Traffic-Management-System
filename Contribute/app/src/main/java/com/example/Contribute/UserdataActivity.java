@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,12 +57,12 @@ public class UserdataActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 searching(s,db);
                 if(s.toString().isEmpty()){
                     getData(db);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 //nothing implemented
@@ -117,9 +116,9 @@ public class UserdataActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         List<DocumentSnapshot> list=task.getResult().getDocuments();
-                        if(list.size()>0){
-                            datalist.clear();
-                        }
+                          if(list.size()>0){
+                              datalist.clear();
+                          }
                         for(DocumentSnapshot d:list)
                         {
                             model obj=d.toObject(model.class);
@@ -130,12 +129,12 @@ public class UserdataActivity extends AppCompatActivity {
                             }*/
                         }
                         adapter.notifyDataSetChanged();
-                        progressBar.dismiss();
+                   progressBar.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
+            e.printStackTrace();
             }
         });
     }

@@ -81,7 +81,7 @@ public class UserDetailsItems extends AppCompatActivity {
             });
 
             if (ISOPEN.equals("true")) {
-                submitStatus.setVisibility(View.VISIBLE);
+                submitStatus.setVisibility(View.GONE);
             } else {
                 submitStatus.setVisibility(View.GONE);
             }

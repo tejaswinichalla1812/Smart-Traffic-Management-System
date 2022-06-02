@@ -103,11 +103,11 @@ public class GoodWillHomeScreen extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Log.d("GOODWILLHOMESCREEN","subscribed");
-                        } else{
-                            Log.d("GOODWILLHOMESCREEN","UnSubscribed");
-                        }
+                   if(task.isSuccessful()){
+                       Log.d("GOODWILLHOMESCREEN","subscribed");
+                   } else{
+                       Log.d("GOODWILLHOMESCREEN","UnSubscribed");
+                   }
                     }
                 });
 
@@ -174,11 +174,11 @@ public class GoodWillHomeScreen extends AppCompatActivity {
                         progressBar.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
@@ -188,4 +188,3 @@ public class GoodWillHomeScreen extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
     }
 }
-

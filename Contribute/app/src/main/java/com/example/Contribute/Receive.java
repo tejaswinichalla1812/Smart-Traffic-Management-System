@@ -47,7 +47,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Receive extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -79,7 +82,8 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
 
         fAuth=FirebaseAuth.getInstance();
         fStore= FirebaseFirestore.getInstance();
-        /*
+/*
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mapFragment.getMapAsync(this);
@@ -133,15 +137,19 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
                     mFullName.setError("Description is Required.");
                     return;
                 }
-         */
+
+
                 userID = fAuth.getCurrentUser().getUid();
                 //DocumentReference documentReference = fStore.collection("receiver").document(userID);
                 CollectionReference collectionReference = fStore.collection("user data");
+                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
-                //   GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
+             //   GeoPoint geoPoint = new GeoPoint(location.getLatitude(),location.getLongitude());
                 Map<String,Object> user = new HashMap<>();
                 user.put("timestamp", FieldValue.serverTimestamp());
                 user.put("name",fullname);
+                user.put("timeID", currentTime);
+
                 user.put("description",description);
                 user.put("pincode",code);
                 user.put("address",addressss);
@@ -157,7 +165,33 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
 
                 user.put("type",type);
 
-                collectionReference.add(user)
+                FirebaseFirestore db=FirebaseFirestore.getInstance();
+                db.collection("user data").document(currentTime)
+                        .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        sendNotification(fullname," : we need your help");
+
+                        Toast.makeText(getApplicationContext(),"Success!",Toast.LENGTH_SHORT).show();
+                        Log.d(TAG,"Success!");
+
+                        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        Intent intent = new Intent(Receive.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(),"Error!",Toast.LENGTH_SHORT).show();
+                        Log.w(TAG, "Error!", e);
+
+                    }
+                });
+
+
+   /*             collectionReference.add(user)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
@@ -179,10 +213,13 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
                                 Log.w(TAG, "Error!", e);
                             }
                         });
-
+*/
             }
         });
+
+
     }
+
     private void sendNotification(String fullname, String fooditem) {
         String topic = "/topics/FOOD";
         String title = "RECEIVE";
@@ -278,7 +315,7 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
         if(requestCode==1111){
             if(resultCode==RESULT_OK){
                 String addressLocation=data.getStringExtra("ADDRESS");
-                Double  latt= data.getDoubleExtra("LATITUDE",0.0d);
+              Double  latt= data.getDoubleExtra("LATITUDE",0.0d);
                 Double longi= data.getDoubleExtra("LONGITUDE",0.0d);
                 latitude=latt.toString();
                 longitude=longi.toString();
@@ -350,7 +387,7 @@ public class Receive extends AppCompatActivity implements OnMapReadyCallback, Go
 
         if (requestCode == REQUEST_CODE){
             if(grantResults.length > 0 && grantResults[0]  == PackageManager.PERMISSION_GRANTED){
-                //     mapFragment.getMapAsync(this);
+           //     mapFragment.getMapAsync(this);
             }else{
                 Toast.makeText(this,"Permission Denied", Toast.LENGTH_SHORT).show();
             }

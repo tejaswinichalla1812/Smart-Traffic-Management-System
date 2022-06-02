@@ -8,7 +8,7 @@
     android:background="@drawable/bthre"
     android:padding="16dp"
     android:gravity="center"
-    tools:context="com.example.Contribute.Signup">
+    tools:context=".Signup">
 
     <LinearLayout
         android:layout_width="match_parent"

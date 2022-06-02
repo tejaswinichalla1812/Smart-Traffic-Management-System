@@ -18,32 +18,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AAHAARAPP"
         tools:ignore="AllowBackup">
-        <activity android:name=".History" />
-        <activity android:name=".MyPin" />
+        <activity
+            android:name="com.example.Contribute.GoodWillLogin"
+            android:exported="true" />
+        <activity
+            android:name="com.example.Contribute.UserDetailsItems"
+            android:exported="false" />
+        <activity android:name="com.example.Contribute.UserdataActivity" />
+        <activity android:name="com.example.Contribute.History" />
+        <activity android:name="com.example.Contribute.MyPin" />
         <activity android:name="com.example.Contribute.About" />
-        <activity android:name=".FoodMap" />
+        <activity android:name="com.example.Contribute.FoodMap" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBtAubRGSlTZanGLTPT3JrKWsRCFAXZzrE" />
 
-        <activity android:name=".Receive" />
-        <activity android:name=".Contact" />
+        <activity android:name="com.example.Contribute.Receive" />
+        <activity android:name="com.example.Contribute.Contact" />
         <activity android:name="com.example.Contribute.Signup" />
         <activity android:name="com.example.Contribute.Logup" />
         <activity android:name="com.example.Contribute.MainActivity" />
-        <activity android:name=".Donate" />
+        <activity android:name="com.example.Contribute.Donate" />
         <activity android:name="com.example.Contribute.landingpage" />
         <activity
             android:name="com.example.Contribute.SplashScreen"
+            android:exported="true"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.Contribute.UserHomeScreen"/>
-        <activity android:name="com.example.Contribute.GoodWillHomeScreen"/>
+        <activity android:name="com.example.Contribute.UserHomeScreen" />
+        <activity android:name="com.example.Contribute.GoodWillHomeScreen" />
+
+        <service android:name="com.example.Contribute.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id"
+            />
     </application>
 
 </manifest>

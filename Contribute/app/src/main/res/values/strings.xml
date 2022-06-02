@@ -1,7 +1,6 @@
 <resources>
     <string name="welcome">Welcome to Contribute</string>
-    <string name="UserHome">User Home Screen</string>
-    <string name="app_name">Contribute</string>
+    <string name="app_name">AAHAR</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="about">About Us</string>
@@ -22,10 +21,14 @@
     <string name="password_error">Please enter a password</string>
     <string name="error_invalid_password">Please enter a minimum password of 6 characters</string>
 
-    <string name="donor_name">Donor Name</string>
+    <string name="donor_name">Contribute Name</string>
+    <string name="donor_things">Things to Donate</string>
+    <string name="donor_duration">Duration</string>
+    <string name="donor_phone">Phone Number</string>
     <string name="food_name">Food Items</string>
     <string name="description">Description</string>
     <string name="pincode">Pin Code</string>
+    <string name="navigate">Navigate to Location</string>
     <string name="submit">Submit</string>
     <string name="address">Address</string>
 
@@ -45,5 +48,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="delete">Delete</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="Contribute">Contribute</string>
 </resources>
 

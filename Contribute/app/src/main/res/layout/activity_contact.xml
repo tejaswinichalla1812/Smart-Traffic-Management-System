@@ -83,6 +83,7 @@
                 android:importantForAutofill="no" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/messageError"
             android:layout_width="match_parent"
@@ -112,7 +113,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="20dp"
@@ -123,3 +124,4 @@
 
     </LinearLayout>
 </LinearLayout>
+

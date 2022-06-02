@@ -11,213 +11,213 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Receive"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:fontFamily="@font/opensans"
-            android:textSize="24sp"
-            android:id="@+id/text_id"
-            android:textColor="@color/white"
-            android:layout_margin="20dp"
-            tools:ignore="HardcodedText" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Receive"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:fontFamily="@font/opensans"
+        android:textSize="24sp"
+        android:id="@+id/text_id"
+        android:textColor="@color/white"
+        android:layout_margin="20dp"
+        tools:ignore="HardcodedText" />
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/text_id"
+        android:layout_gravity="center">
+        <androidx.cardview.widget.CardView
+            xmlns:Card_View="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/text_id"
-            android:layout_gravity="center">
-            <androidx.cardview.widget.CardView
-                xmlns:Card_View="http://schemas.android.com/apk/res-auto"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            Card_View:cardCornerRadius="5dp"
+            Card_View:cardElevation="0dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"
-                android:padding="10dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                Card_View:cardCornerRadius="5dp"
-                Card_View:cardElevation="0dp">
-                <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameError"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:orientation="vertical">
+                    android:layout_marginTop="5dp"
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/nameError"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    app:boxStrokeColor="@color/white">
+
+                    <EditText
+                        android:id="@+id/receivername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-
-                        android:textColorHint="@color/white"
-                        app:hintTextColor="@color/white"
-                        app:boxStrokeColor="@color/white">
-
-                        <EditText
-                            android:id="@+id/receivername"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="@string/receiver_name"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/opensans"
-                            android:inputType="text"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:backgroundTint="@android:color/transparent"
-                            android:maxLines="1"
-                            android:singleLine="true"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/descriptionError"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:hintTextColor="@color/white"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/opensans"
-                        app:boxStrokeColor="@color/white">
-
-                        <EditText
-                            android:id="@+id/description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="@string/description"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/opensans"
-                            android:inputType="textMultiLine"
-                            android:maxLines="10"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:backgroundTint="@android:color/transparent"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/phoneError"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:hintTextColor="@color/white"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/opensans"
-                        app:boxStrokeColor="@color/white">
-
-                        <EditText
-                            android:id="@+id/phone_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="@string/phone_number"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/opensans"
-                            android:inputType="phone"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:backgroundTint="@android:color/transparent"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/addressError"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:hintTextColor="@color/white"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/opensans"
-                        app:boxStrokeColor="@color/white">
-
-                        <EditText
-                            android:id="@+id/addresss"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="@string/address"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/opensans"
-                            android:inputType="textMultiLine"
-                            android:maxLines="2"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:backgroundTint="@android:color/transparent"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/pincodeerror"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:passwordToggleEnabled="true"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:hintTextColor="@color/white"
-                        android:textSize="20sp"
-                        android:fontFamily="@font/opensans"
-                        app:boxStrokeColor="@color/white">
-                        <EditText
-                            android:id="@+id/pincode"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="@string/pincode"
-                            android:textSize="20sp"
-                            android:fontFamily="@font/opensans"
-                            android:inputType="phone"
-                            android:maxLines="10"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:backgroundTint="@android:color/transparent"
-                            android:importantForAutofill="no"
-                            tools:ignore="UnusedAttribute" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <Button
-                        android:id="@+id/navigate_donor"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
-                        android:hint="@string/navigate"
-                        android:backgroundTint="@color/button_background_color"
+                        android:hint="@string/receiver_name"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:inputType="text"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:backgroundTint="@android:color/transparent"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    app:boxStrokeColor="@color/white">
+
+                    <EditText
+                        android:id="@+id/description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/description"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:inputType="textMultiLine"
+                        android:maxLines="10"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:backgroundTint="@android:color/transparent"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phoneError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    app:boxStrokeColor="@color/white">
+
+                    <EditText
+                        android:id="@+id/phone_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/phone_number"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:inputType="phone"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:backgroundTint="@android:color/transparent"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/addressError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    app:boxStrokeColor="@color/white">
+
+                    <EditText
+                        android:id="@+id/addresss"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/address"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/opensans"
+                        android:inputType="textMultiLine"
+                        android:maxLines="2"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:backgroundTint="@android:color/transparent"
+                        android:importantForAutofill="no"
+                        tools:ignore="UnusedAttribute" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/pincodeerror"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    app:hintTextColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    app:boxStrokeColor="@color/white">
+                    <EditText
+                        android:id="@+id/pincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/pincode"
                         android:textSize="20sp"
                         android:fontFamily="@font/opensans"
                         android:inputType="phone"
                         android:maxLines="10"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
+                        android:backgroundTint="@android:color/transparent"
                         android:importantForAutofill="no"
                         tools:ignore="UnusedAttribute" />
 
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                    android:id="@+id/navigate_donor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/navigate"
+                    android:backgroundTint="@color/button_background_color"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/opensans"
+                    android:inputType="phone"
+                    android:maxLines="10"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:importantForAutofill="no"
+                    tools:ignore="UnusedAttribute" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -230,3 +230,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
+

@@ -32,6 +32,7 @@ public class History extends AppCompatActivity {
         textViewData=findViewById(R.id.data);
         loadNotes();
     }
+
     public void loadNotes() {
         notebookref.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

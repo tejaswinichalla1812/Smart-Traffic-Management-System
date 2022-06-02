@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.Contribute.R;
-
 public class SplashScreen extends AppCompatActivity {
 
     Button userPage,goodWillPage;
@@ -33,7 +31,7 @@ public class SplashScreen extends AppCompatActivity {
         goodWillPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), GoodWillHomeScreen.class);
+                Intent intent = new Intent(getApplicationContext(), GoodWillLogin.class);
                 startActivity(intent);
             }
         });

@@ -1,47 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context="com.example.Contribute.UserdataActivity">
+    tools:context=".UserdataActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/history_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:text="@string/history"
-            android:id="@+id/history_tv"
+            android:layout_margin="20dp"
             android:fontFamily="@font/opensans"
-            android:textSize="26sp"
+            android:text="@string/history"
             android:textColor="@color/white"
-            android:layout_margin="20dp"/>
+            android:textSize="26sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:layout_width="match_parent"
             android:id="@+id/search_tv"
-            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Search Pincode"
             android:singleLine="true"
+            android:textColor="@color/white"
             android:textColorHint="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/history_tv"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintTop_toBottomOf="@id/history_tv" />
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/search_tv"
-            android:id="@+id/rec_view"/>
+            app:layout_constraintTop_toBottomOf="@id/search_tv" />
+
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:textColor="@color/black"
+            android:textColorHint="@color/red"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

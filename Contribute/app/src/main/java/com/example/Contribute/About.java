@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.Contribute.R;
-
 
 public class About extends AppCompatActivity {
 

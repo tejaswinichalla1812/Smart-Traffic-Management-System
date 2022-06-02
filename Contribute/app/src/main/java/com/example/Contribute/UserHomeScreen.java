@@ -8,8 +8,6 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.Contribute.R;
-
 public class UserHomeScreen extends AppCompatActivity {
 
     Button loginPage,registerPage,aboutusPage;

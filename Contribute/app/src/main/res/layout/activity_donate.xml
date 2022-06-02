@@ -252,9 +252,11 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/delete"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_margin="20dp"
@@ -264,6 +266,7 @@
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="UnusedAttribute" />
-        
+
     </LinearLayout>
 </ScrollView>
+

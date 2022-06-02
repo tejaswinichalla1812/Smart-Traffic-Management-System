@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,11 +38,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Donate extends AppCompatActivity {
@@ -52,11 +58,11 @@ public class Donate extends AppCompatActivity {
     LocationRequest mLocationRequest;
     private int REQUEST_CODE = 11;
     SupportMapFragment mapFragment;
-    EditText mFullName,  mDescription, mPhone, pincode, address,donorthings,foodDuration;
+    EditText mFullName, mDescription, mPhone, pincode, address, donorthings, foodDuration;
     Button mSubmitBtn, navigate_donor;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    String userID,latitude="",longitude="";
+    String userID, latitude = "", longitude = "";
     public static final String TAG = "TAG";
 
     @Override
@@ -93,6 +99,7 @@ public class Donate extends AppCompatActivity {
                 String addressss = address.getText().toString();
                 String foodDurationTime = foodDuration.getText().toString();
                 String type = "Donor";
+
                 if (TextUtils.isEmpty(fullname)) {
                     mFullName.setError("Name is Required.");
                     return;
@@ -118,12 +125,15 @@ public class Donate extends AppCompatActivity {
                     mPhone.setError("Phone Number Must be >=10 Characters");
                     return;
                 }
+                String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
 
                 userID = fAuth.getCurrentUser().getUid();
                 CollectionReference collectionReference = fStore.collection("user data");
                 Map<String, Object> user = new HashMap<>();
+                user.put("timestamp", FieldValue.serverTimestamp());
                 user.put("name", fullname);
-                user.put("food item", "");
+                user.put("timeID", currentTime);
                 user.put("phone", phone);
                 user.put("description", description);
                 user.put("pincode", code);
@@ -136,8 +146,31 @@ public class Donate extends AppCompatActivity {
                 user.put("foodDurationTime", foodDurationTime);
                 user.put("type", type);
 
+                FirebaseFirestore db=FirebaseFirestore.getInstance();
+                db.collection("user data").document(currentTime)
+                        .set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        sendNotification(fullname, thingstoDonate, type);
+                        Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Success!");
+                        Intent intent = new Intent(Donate.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
 
-                collectionReference.add(user)
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error!", Toast.LENGTH_SHORT).show();
+                        Log.w(TAG, "Error!", e);
+
+                    }
+                });
+
+
+
+        /*        collectionReference.add(user)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
@@ -156,6 +189,7 @@ public class Donate extends AppCompatActivity {
                                 Log.w(TAG, "Error!", e);
                             }
                         });
+        */
             }
         });
 
@@ -219,6 +253,7 @@ public class Donate extends AppCompatActivity {
         }
     }
 
+
     private void checkGPS() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2222);
@@ -262,13 +297,12 @@ public class Donate extends AppCompatActivity {
         if (requestCode == 1111) {
             if (resultCode == RESULT_OK) {
                 String addressLocation = data.getStringExtra("ADDRESS");
-                Double  latt= data.getDoubleExtra("LATITUDE",0.0d);
-                Double longi= data.getDoubleExtra("LONGITUDE",0.0d);
-                latitude=latt.toString();
-                longitude=longi.toString();
+                Double latt = data.getDoubleExtra("LATITUDE", 0.0d);
+                Double longi = data.getDoubleExtra("LONGITUDE", 0.0d);
+                latitude = latt.toString();
+                longitude = longi.toString();
                 address.setText(addressLocation);
             }
         }
     }
 }
-
