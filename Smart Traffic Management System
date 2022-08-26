@@ -1,0 +1,11 @@
+Abstract :  In current scenario one of the serious concern for people in smart cities such as Delhi, Bangalore, Mumbai, Hyderabad etc. It is traffic
+congestion. This has turned out to be a daily problem in current time.Due to this road congestion accidents in the city have are raised to a 
+great extent so lives lost due to accidents are even more crucial. Due to this congestion on the roads, emergency vehicles such as 
+ambulances, fire-cars and other vehicles cannot reach on time. This results in huge loss of life. To tackle these issues up to a 
+great extent we present a solution in this paper. Through the use of IoT enabled technology we can solve these issues by
+creating "Green Corridors" for emergency vehicles. This can save their time expansion for reaching the proposed
+destination and can prevent the loss of human life up to great extent. IoT provides a method to tackle these issues by providing smart
+and intelligent traffic management system. The system gives emergency vehicles the benefit of green corridor and reach destination
+on time. The RFID reader scans the RFID tag applied on the ambulance and updates the upcoming traffic light to switch to green and displays
+a message to vehicles ahead of ambulance to provide a "Green Corridor" by shifting other lanes. This system comprises whole traffic system and 
+functions for emergency situations in order to reach the destinatio without any delay.
