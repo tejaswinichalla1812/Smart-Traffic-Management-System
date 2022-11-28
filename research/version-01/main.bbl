@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{richards2005mixed}
+Arthur Richards and Jonathan How.
+\newblock Mixed-integer programming for control.
+\newblock In {\em Proceedings of the 2005, American Control Conference, 2005.}
+  IEEE, 2005.
+
+\bibitem{wagstaff2001constrained}
+Kiri Wagstaff, Claire Cardie, Seth Rogers, Stefan Schr{\"o}dl, et~al.
+\newblock Constrained k-means clustering with background knowledge.
+\newblock In {\em Icml}, 2001.
+
+\end{thebibliography}
